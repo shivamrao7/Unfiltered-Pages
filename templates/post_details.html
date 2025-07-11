@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div style="
+        background-color: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-left: 4px solid #4CAF50;
+    ">
+        <h1 style="margin: 0 0 15px 0; color: #333; font-size: 2.2em;">{{ post.title }}</h1>
+        
+        <div style="
+            color: #666;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        ">
+            <p style="margin: 0; font-size: 0.95em;">
+                By <strong>{{ post.author }}</strong> on {{ post.created_at }}
+            </p>
+        </div>
+        
+        <div style="
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.1em;
+        ">
+            {{ post.body|safe }}
+        </div>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <a href="{{ url_for('posts.show_posts') }}" style="
+                color: #666;
+                text-decoration: none;
+                margin-right: 15px;
+            ">← Back to posts</a>
+            
+            {% if session.get('username') %}
+                <a href="{{ url_for('posts.edit_post', post_id=post.id) }}" style="
+                    color: #2196F3;
+                    text-decoration: none;
+                ">Edit this post</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

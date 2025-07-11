@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "title": "new blog",
+        "body": "hi this is new blog",
+        "author": "shivam",
+        "is_published": true,
+        "created_at": "2025-07-11 10:12"
+    }
+]
+

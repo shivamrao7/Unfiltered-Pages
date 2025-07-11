@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title if post else 'New Post' }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div style="
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    ">
+        <h2 style="text-align: center; color: #333; margin-bottom: 30px;">
+            {{ post.title if post else 'Create New Post' }}
+        </h2>
+        
+        <form method="POST">
+            <div style="margin-bottom: 20px;">
+                <label for="title" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter post title" 
+                       value="{{ post.title if post else '' }}" required 
+                       style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label for="body" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Content:</label>
+                <textarea id="body" name="body" rows="12" placeholder="Write your blog post content..." required 
+                          style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; font-family: inherit;">{{ post.body if post else '' }}</textarea>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; color: #555; cursor: pointer;">
+                    <input type="checkbox" name="publish" {% if post and post.is_published %}checked{% endif %} 
+                           style="margin-right: 8px;">
+                    Publish immediately
+                </label>
+            </div>
+            
+            <button type="submit" style="
+                width: 100%;
+                padding: 12px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: bold;
+            ">{{ 'Update Post' if post else 'Create Post' }}</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('posts.show_posts') }}" style="
+                color: #666;
+                text-decoration: none;
+            ">← Back to posts</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

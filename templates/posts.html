@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title if title else 'All Blog Posts' }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h1 style="text-align: center; color: #333; margin-bottom: 30px;">{{ title if title else 'All Blog Posts' }}</h1>
+    
+    {% if session.get('username') %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="{{ url_for('posts.new_post') }}" style="
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+            ">+ Create New Post</a>
+        </div>
+    {% endif %}
+
+    <div style="display: grid; gap: 20px;">
+        {% for post in posts %}
+            <div style="
+                background-color: white;
+                padding: 25px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-left: 4px solid #4CAF50;
+            ">
+                <h2 style="margin: 0 0 10px 0; color: #333;">
+                    <a href="{{ url_for('posts.post_detail', post_id=post.id) }}" style="
+                        color: #4CAF50;
+                        text-decoration: none;
+                    ">{{ post.title }}</a>
+                </h2>
+                
+                <p style="color: #666; font-size: 0.9em; margin: 5px 0;">
+                    By {{ post.author }} on {{ post.created_at }}
+                </p>
+                
+                <p style="line-height: 1.6; color: #555; margin: 15px 0;">
+                    {{ post.body[:200] }}{% if post.body|length > 200 %}...{% endif %}
+                </p>
+                
+                <div style="margin-top: 15px;">
+                    <a href="{{ url_for('posts.post_detail', post_id=post.id) }}" style="
+                        color: #4CAF50;
+                        text-decoration: none;
+                        font-weight: bold;
+                        margin-right: 15px;
+                    ">Read More →</a>
+                    
+                    {% if session.get('username') %}
+                        <a href="{{ url_for('posts.edit_post', post_id=post.id) }}" style="
+                            color: #2196F3;
+                            text-decoration: none;
+                        ">Edit</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div style="text-align: center; padding: 40px; color: #666;">
+                <p style="font-size: 1.2em;">No posts found.</p>
+                {% if session.get('username') %}
+                    <p>Create your first post!</p>
+                {% else %}
+                    <p>Login to create posts.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

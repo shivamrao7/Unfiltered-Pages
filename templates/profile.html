@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PROFILE PAGE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      background-color: black;
+      color: white;
+    }
+
+    .sidebar {
+      height: 100vh;
+      width: 200px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #333;
+      padding-top: 60px;
+    }
+
+    .sidebar h2 {
+      color: white;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      padding: 12px;
+      text-decoration: none;
+      margin: 8px 0;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+      color: white;
+    }
+
+    /* Content shift due to fixed sidebar */
+    body > h1 {
+      margin-left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Profile</h1>
+  <div class="sidebar">
+    <h2>Sidebar</h2>
+    <a href="/templates/published_posts.html">Home</a>
+    <a href="/templates/posts.html">Posts</a>
+    <a href="/templates/mail.html">Send Notification</a>
+    <a href="/templates/home.html">Logout</a>
+    
+  </div>
+</body>
+</html>
+
